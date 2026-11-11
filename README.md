@@ -1,58 +1,68 @@
-# Analise-forense-terravision-evelyn-lemes
-# Análise Forense & Computação Gráfica - TerraVision / Google Earth
+# RELATÓRIO DE ANÁLISE FORENSE COMPUTACIONAL E COMPUTAÇÃO GRÁFICA
+### Estudo de Caso: Algoritmo TerraVision (ART+COM) vs. Google Earth
 
-**Estudante:** Evelyn Kauany Lemes da Silva  
-**Número:** 06  
-**Turma:** 3°D - DS | **Turno:** Matutino | **3° Trimestre**  
-**Disciplinas Integradas:** Computação Gráfica, Ciência de Dados & Engenharia de Software  
-**Professora:** Angélica Neckel  
-**Tema Designado:** 6. Zonas Desérticas e Camadas de Areia (Uniformes e Dunas)  
-**Objeto de Estudo:** Análise Forense da Arquitetura de Software do TerraVision / Google Earth (Caso ART+COM vs. Google)
-
----
-
-## 1. Ciência de Dados & Lógica Computacional (`script.py`)
-
-Em sistemas geospaciais 3D em tempo real, renderizar todas as texturas em resolução máxima exigiria uma quantidade inviável de memória RAM e VRAM. O arquivo `script.py` simula o algoritmo de **Level of Detail (LoD)**, utilizando estruturas condicionais (`if`, `elif`, `else`) para dinamicamente segmentar o carregamento da malha conforme a altitude da câmera virtual.
-
-### A. Mapeamento Lógico por Nível de Zoom
-* **Baixa Resolução (`altitude > 10.000m`):** Retorna o mosaico macro-continental do deserto. A prioridade computacional é a velocidade de transmissão de rede e a visualização global das fronteiras desérticas.
-* **Média Resolução (`1.000m <= altitude <= 10.000m`):** Carrega mosaicos regionais destacando o relevo de dunas, vales de areia e cristas de grande porte. Reduz a sobrecarga de renderização enquanto o usuário navega em altitude intermediária.
-* **Alta Resolução (`altitude < 1.000m`):** Renderiza texturas finas de alta definição, permitindo a visualização de micro-dunas, ondulações provocadas pelo vento e pequenas variações topográficas do terreno árido.
-
-### B. Correlação Forense com o Caso TerraVision
-A perícia de código realizada no julgamento demonstrou que a requisição em pirâmide de blocos geográficos (*tile pyramid streaming*) baseada em coordenadas condicionais e altitude era a ideia patenteada pela ART+COM. A lógica `if/else` implementada no `script.py` representa a base do algoritmo de otimização de dados geoespaciais disputado no tribunal.
+**Instituição:** Ensino Médio Técnico em Desenvolvimento de Sistemas  
+**Disciplinas Integradas:** Computação Gráfica, Ciência de Dados, Engenharia de Software, Lógica de Programação e Análise Forense Computacional  
+**Docente Responsável:** Prof.ª Angélica Neckel  
+**Discente:** Evelyn Kauany Lemes da Silva | **N.º:** 06 | **Turma:** 3.º D — Matutino  
+**Tema de Sensoriamento Remoto Designado:** Tema 6 — Zonas Desérticas e Camadas de Areia (Uniformes e Dunas)  
+**Data de Submissão:** 02 de Novembro de 2026  
 
 ---
 
-## 2. Análise de Computação Gráfica & UX/UI
+## 1. Contextualização Histórica e Perícia Forense (A Minissérie)
 
-### A. Desafios de Processamento e Tratamento de Imagem
-1. **Costura de Imagem (*Stitching*) e Algoritmos de Ajuste:**
-   * **Desafio:** Regiões desérticas apresentam tom sobre tom (amarelo, bege, marrom) sem grandes pontos de referência contrastantes.
-   * **Impacto em CG:** Algoritmos de busca por pontos de interesse (como SIFT ou SURF) falham ao tentar encontrar vértices idênticos em fotos de satélite adjacentes. Isso pode gerar costuras visíveis (*seams*) ou desalinhar dunas contínuas.
-   * **Solução Técnica:** Aplicação de normalização de histograma e correção de cor multiespectral antes do alinhamento tridimensional.
-2. **Sombreamento e Variação Fotométrica (*Shading & Exposure*):**
-   * **Desafio:** Imagens de satélite capturadas em horários ou estações diferentes possuem incidências solares distintas.
-   * **Impacto em CG:** Como dunas dependem diretamente do sombreamento (*shadow casting*) para demonstrar volume 3D, emendas de imagens com sombras em ângulos opostos quebram a ilusão tridimensional e a fidelidade forense da representação.
+A controvérsia jurídica retratada no tribunal de Delaware entre a empresa alemã ART+COM e a corporação Google fundamentou-se na prioridade de patente sobre o algoritmo de *streaming* de dados geoespaciais em tempo real. Conforme abordado no **Episódio 2 (O Algoritmo)** e no **Episódio 4 (O Julgamento Final)**:
 
-### B. Design de Interface & Leis da Gestalt
-* **Lei da Continuidade:** As ondulações e cristas das dunas formam linhas fluídas na paisagem. O renderizador mantém a fidelidade dessas curvas contínuas durante a transição de textura (LoD), evitando que a troca de resolução cause saltos bruscos (*popping effect*) na percepção do usuário.
-* **Lei da Figura-Fundo:** Devido à homogeneidade da areia (fundo), a interface do usuário (UI) e o renderizador projetam elementos de interesse — como estradas, formações rochosas, veículos ou oásis — com maior contraste (figura), orientando o foco de análise visual durante a navegação.
-* **Lei do Fechamento:** O cérebro humano completa o desenho de cristas e formações desérticas interrompidas por áreas sem dados em alta resolução, garantindo navegação intuitiva mesmo quando o carregamento da rede oscila.
+* **Inovação Técnica da ART+COM:** O software *TerraVision* introduziu o conceito de representação multinível do planeta Terra (*tile pyramid streaming*), requisitando fragmentos de imagens dinamicamente de acordo com as coordenadas do usuário e a altitude da câmera virtual.
+* **Quebra Forense de Código:** A auditoria computacional apresentada em juízo demonstrou que a otimização de memória por meio de estruturas condicionais encadeadas (`if/elif/else`) constituía a espinha dorsal lógica para viabilizar a navegação fluída sem sobrecarregar a memória VRAM das estações de trabalho da época.
 
 ---
 
-## 3. Evidências Visuais e Análise de Tela
+## 2. Ciência de Dados e Lógica de Programação (`script.py`)
 
-![Mapeamento de Zona Desértica](deserto.png)  
-*Figura 1: Captura de tela do Google Earth mapeando o terreno desértico, demonstrando a renderização da malha 3D de dunas e a aplicação do algoritmo de iluminação solar.*
+No escopo da disciplina de Ciência de Dados, a manipulação de grandes volumes de dados espaciais exige estratégias estritas de otimização de infraestrutura de hardware. O script em linguagem Python (`script.py`) simula o mecanismo de **Level of Detail (LoD)** empregado pelos motores de renderização 3D.
+
+### A. Algoritmo de Controle por Altitude
+O processamento condicional classifica a aproximação da câmera virtual em três patamares hierárquicos:
+
+1. **Baixa Resolução ($\text{Altitude} > 10.000\,\text{m}$ — LoD 0):**
+   * *Ação:* Requisição do mosaico macro-continental desértico.
+   * *Foco Computacional:* Minimização da amostragem poligonal e economia de largura de banda de rede para renderização de escala planetária.
+2. **Média Resolução ($1.000\,\text{m} \le \text{Altitude} \le 10.000\,\text{m}$ — LoD 1):**
+   * *Ação:* Mapeamento regional topográfico dos campos de dunas (*ergs*) e maciços rochosos.
+   * *Foco Computacional:* Carregamento de malhas tridimensionais intermediárias com aplicação de filtragem anisotrópica para preservação da textura em perspectiva.
+3. **Alta Resolução ($\text{Altitude} < 1.000\,\text{m}$ — LoD 2):**
+   * *Ação:* Renderização de alta fidelidade das micro-dunas, ondulações geradas pelo vento (*ripples*) e detalhamento tátil da areia.
+   * *Foco Computacional:* Utilização de *Normal Mapping* e consumo de alta taxa de preenchimento (*fill rate*) da placa gráfica.
 
 ---
 
-## 4. Guia de Sustentação Técnica (Roteiro do Pitch Oral)
+## 3. Computação Gráfica, Processamento de Imagens e UX/UI
 
-1. **Introdução (30s):** Apresente o tema de Zonas Desérticas e destaque que superfícies homogêneas são desafios clássicos para algoritmos de visão computacional e rendering.
-2. **Lógica em Python (1min):** Explique como a função `carregar_camada_satelite` em `script.py` simula o carregamento condicional por altitude (`if/elif/else`) para economizar memória RAM/VRAM.
-3. **Computação Gráfica & Gestalt (1min):** Explique o problema de *stitching* (costura) na areia, variação de sombras nas dunas e como as leis da Continuidade e Figura-Fundo facilitam a navegação do usuário.
-4. **Conclusão (30s):** Finalize relacionando a otimização visual com o caso judicial do TerraVision vs. Google.
+### A. Desafios de Tratamento Fotométrico e Alinhamento de Imagens
+* **Complexidade do *Stitching* em Superfícies Homogêneas:** O mapeamento de ecossistemas desérticos apresenta reduzida variação cromática (predominância de tons beges e amarelados). Algoritmos convencionais de detecção de pontos de interesse (como SIFT/SURF) enfrentam inconsistência na identificação de vértices correspondentes, aumentando a probabilidade de artefatos visíveis nas emendas de mosaicos de satélite.
+* **Inconsistência Fotométrica e Sombra Dinâmica:** A percepção de relevo tridimensional em dunas de areia depende da incidência da iluminação solar. Imagens de satélite obtidas sob diferentes ângulos zenitais criam divergências de sombreamento (*shadow casting*), exigindo normalização de histogramas para evitar descontinuidade no modelo 3D.
+
+### B. Aplicação das Leis da Gestalt na Interface de Usuário
+* **Lei da Continuidade:** As cristas curvilíneas e contínuas das dunas são preservadas graficamente pelo motor de renderização durante a alternância entre níveis de LoD, assegurando a estabilidade visual e prevenindo o fenômeno de *popping* (transição abrupta de geometrias).
+* **Lei da Figura-Fundo:** O design de interface tira proveito da uniformidade do terreno (areia atuando como matriz de fundo) para destacar vetores de interesse analítico, tais como oásis, vias de transporte e afloramentos rochosos (figuras de elevado contraste).
+* **Lei do Fechamento:** Habilita a interpretação cognitiva da topografia continuada pelo operador da aplicação, mesmo diante de eventuais latências de rede no carregamento dos blocos de textura de alta definição.
+
+---
+
+## 4. Evidência de Mapeamento Geográfico
+
+(<img width="1024" height="559" alt="image" src="https://github.com/user-attachments/assets/f0e34efc-cc18-4dd4-b197-dea76e09d0ad" />)  
+*Figura 1: Mapeamento orbital de terreno árido via Google Earth. Observa-se a aplicação da renderização tridimensional de relevo, o sombreamento dinâmico de cristas e a manutenção da continuidade estrutural do solo.*
+
+---
+
+## 5. Estrutura do Relatório de Sustentação Técnica (Pitch Oral)
+
+Para a defesa individual perante a banca examinadora, a sustentação oral observará o seguinte encadeamento analítico:
+
+1. **Introdução Técnica (30 segundos):** Apresentação da estudante como analista e síntese dos desafios de computação gráfica na representação de terrenos de baixa variância cromática.
+2. **Fundamentação de Ciência de Dados (60 segundos):** Explanação da função `carregar_camada_satelite` em Python, destacando como o controle por *hardware* via blocos condicionais se conecta à disputa de patentes do caso *TerraVision*.
+3. **Análise de Computação Gráfica (60 segundos):** Diagnóstico das limitações de *stitching*, inconsistências fotométricas nas sombras das dunas e a aplicação das Leis da Gestalt na navegação.
+4. **Síntese e Conclusão (30 segundos):** Considerações finais sobre a importância da arquitetura de software na viabilização de sistemas GIS (*Geographic Information Systems*) modernos.
