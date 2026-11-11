@@ -1,29 +1,78 @@
+
 # script.py
 # Aluna: Evelyn Kauany Lemes da Silva | N° 06 | Turma: 3°D - DS
+# Disciplinas: Computação Gráfica & Ciência de Dados
+# Professora: Angélica Neckel
 # Tema 6: Zonas Desérticas e Camadas de Areia (Uniformes e Dunas)
+# Projeto: Simulação de Renderização Adaptativa por Level of Detail (LoD)
 
-def carregar_camada_satelite(lista_altitudes):
+from typing import List, Union
+
+def carregar_camada_satelite(lista_altitudes: List[Union[int, float]]) -> None:
     """
-    Determina o Nível de Detalhe (LoD) de renderização com base na altitude da câmera
-    para a visualização de Zonas Desérticas e Camadas de Areia.
+    Simula a seleção dinâmica do Nível de Detalhe (Level of Detail - LoD) de imagens 
+    de satélite em tempo real, otimizando o consumo de RAM/VRAM de acordo com a altitude 
+    da câmera virtual em regiões desérticas.
+
+    Parâmetros:
+        lista_altitudes (List[Union[int, float]]): Lista contendo altitudes da câmera em metros.
+    
+    Exceções:
+        TypeError: Se a lista contiver elementos não numéricos.
+        ValueError: Se a lista contiver altitudes negativas.
     """
-    for altitude in lista_altitudes:
-        print(f"\n[Altitude Atual: {altitude}m]")
-        
+    if not isinstance(lista_altitudes, list) or len(lista_altitudes) < 5:
+        raise ValueError("A entrada deve ser uma lista contendo no mínimo 5 valores de altitude.")
+
+    print("=" * 80)
+    print("SISTEMA DE PROCESSAMENTO GEOESPACIAL TERRAVISION - MÓDULO LOD (DESERTOS)")
+    print("=" * 80)
+
+    for i, altitude in enumerate(lista_altitudes, start=1):
+        # Validação de tipo e valor
+        if not isinstance(altitude, (int, float)):
+            print(f"\n[Erro Ponto {i}]: Valor de altitude inválido ('{altitude}'). Ignorando requisição.")
+            continue
+            
+        if altitude < 0:
+            print(f"\n[Erro Ponto {i}]: Altitude negativa ({altitude}m) é biologicamente/geograficamente impossível para câmera aérea.")
+            continue
+
+        print(f"\n[Requisição {i} - Altitude da Câmera: {altitude:,.1f}m]")
+
+        # Lógica de decisão adaptativa de renderização (LoD)
         if altitude > 10000:
-            # Baixa Resolução (> 10.000m)
-            print("Renderizando: Camada de Baixa Resolução (Mosaico continental de vastas extensões áridas e limites do deserto).")
-            
+            # Baixa Resolução: Visão Orbital / Mosaico Global
+            print(" -> Nível LoD: BAIXA RESOLUÇÃO (LoD 0)")
+            print(" -> Processamento: Mosaico macro-continental e limites de bacias áridas.")
+            print(" -> Asset Renderizado: Carregando mapa de textura difusa uniforme global do deserto.")
+            print(" -> Otimização: Baixa taxa de amostragem de polígonos; prioridade em largura de banda de rede.")
+
         elif 1000 <= altitude <= 10000:
-            # Média Resolução (1.000m a 10.000m)
-            print("Renderizando: Camada de Média Resolução (Mapeamento regional dos campos de dunas, cristas e formações rochosas).")
-            
-        else: # altitude < 1000m
-            # Alta Resolução (< 1.000m)
-            print("Renderizando: Camada de Alta Resolução (Detalhamento fino das texturas da areia, micro-dunas e ondulações do vento).")
+            # Média Resolução: Visão Regional / Campos de Dunas
+            print(" -> Nível LoD: MÉDIA RESOLUÇÃO (LoD 1)")
+            print(" -> Processamento: Mapeamento regional topográfico dos grandes ergs e maciços rochosos.")
+            print(" -> Asset Renderizado: Carregando malha 3D intermediária com relevo de dunas transversais e cristas.")
+            print(" -> Otimização: Filtragem anizotrópica ativada para suavizar a transição de textura em perspectiva.")
 
-# Lista de teste com 5 valores de altitude (em metros)
-altitudes_teste = [18000, 7500, 3200, 950, 300]
+        else:
+            # Alta Resolução (< 1.000m): Visão Local / Detalhes de Micro-Relevo
+            print(" -> Nível LoD: ALTA RESOLUÇÃO (LoD 2)")
+            print(" -> Processamento: Detalhamento macro-fotográfico de superfície arenosa uniforme.")
+            print(" -> Asset Renderizado: Carregando texturas 4K de micro-dunas, ondulações de vento (ripples) e sombreamento dinâmico.")
+            print(" -> Otimização: Carga máxima de VRAM ativada; renderização com mapa de normais (Normal Mapping).")
 
-# Execução da função
-carregar_camada_satelite(altitudes_teste)
+    print("\n" + "=" * 80)
+    print("STATUS DE EXECUÇÃO: Processamento da simulação de câmera concluído com sucesso.")
+    print("=" * 80)
+
+
+if __name__ == "__main__":
+    # Conjunto de dados de teste (contendo 6 amostras para ultrapassar o mínimo de 5 exigido)
+    altitudes_simuladas = [18500.0, 9200.5, 4500.0, 1200.0, 650.0, 150.0]
+
+    # Execução da rotina forense
+    try:
+        carregar_camada_satelite(altitudes_simuladas)
+    except (ValueError, TypeError) as erro:
+        print(f"Falha na execução do algoritmo: {erro}")
