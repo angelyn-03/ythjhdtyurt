@@ -1,0 +1,29 @@
+# script.py
+# Aluna: Evelyn Kauany Lemes da Silva | N° 06 | Turma: 3°D - DS
+# Tema 6: Zonas Desérticas e Camadas de Areia (Uniformes e Dunas)
+
+def carregar_camada_satelite(lista_altitudes):
+    """
+    Determina o Nível de Detalhe (LoD) de renderização com base na altitude da câmera
+    para a visualização de Zonas Desérticas e Camadas de Areia.
+    """
+    for altitude in lista_altitudes:
+        print(f"\n[Altitude Atual: {altitude}m]")
+        
+        if altitude > 10000:
+            # Baixa Resolução (> 10.000m)
+            print("Renderizando: Camada de Baixa Resolução (Mosaico continental de vastas extensões áridas e limites do deserto).")
+            
+        elif 1000 <= altitude <= 10000:
+            # Média Resolução (1.000m a 10.000m)
+            print("Renderizando: Camada de Média Resolução (Mapeamento regional dos campos de dunas, cristas e formações rochosas).")
+            
+        else: # altitude < 1000m
+            # Alta Resolução (< 1.000m)
+            print("Renderizando: Camada de Alta Resolução (Detalhamento fino das texturas da areia, micro-dunas e ondulações do vento).")
+
+# Lista de teste com 5 valores de altitude (em metros)
+altitudes_teste = [18000, 7500, 3200, 950, 300]
+
+# Execução da função
+carregar_camada_satelite(altitudes_teste)
