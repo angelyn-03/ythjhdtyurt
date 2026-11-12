@@ -53,8 +53,8 @@ O processamento condicional classifica a aproximação da câmera virtual em tr�
 
 ## 4. Evidência de Mapeamento Geográfico
 
-(<img width="1024" height="559" alt="image" src="https://github.com/user-attachments/assets/f0e34efc-cc18-4dd4-b197-dea76e09d0ad" />)  
-Figura 1: Mapeamento orbital de terreno árido via Google Earth. Observa-se a aplicação da renderização tridimensional de relevo, o sombreamento dinâmico de cristas e a manutenção da continuidade estrutural do solo.
+<img width="1024" height="559" alt="image" src="https://github.com/user-attachments/assets/f0e34efc-cc18-4dd4-b197-dea76e09d0ad" />  
+*Figura 1: Mapeamento orbital de terreno árido via Google Earth. Observa-se a aplicação da renderização tridimensional de relevo, o sombreamento dinâmico de cristas e a manutenção da continuidade estrutural do solo.*
 
 ---
 
