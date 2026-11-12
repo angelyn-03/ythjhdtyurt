@@ -51,12 +51,25 @@ O processamento condicional classifica a aproximação da câmera virtual em tr�
 
 ---
 
-## 4. Evidência de Mapeamento Geográfico
 
-![Captura de tela do Google Earth](deserto di saara.png)  
-*Figura 1: Mapeamento orbital de terreno árido via Google Earth. Observa-se a aplicação da renderização tridimensional de relevo, o sombreamento dinâmico de cristas e a manutenção da continuidade estrutural do solo.*
+## 4. Evidência de Mapeamento Geográfico e Análise de Imagem
 
----
+![Mapeamento do Templo de Hatshepsut e Paredão Rochoso Árido](https://upload.wikimedia.org/wikipedia/commons/e/e3/Deir_el_Bahari%2C_Mortuary_Temple_of_Hatshepsut_1.jpg)  
+*Figura 1: Mapeamento em Alta Resolução (LoD 2) do complexo arquitetônico de Deir el-Bahari em ambiente desértico.*
+
+### Análise Técnica da Imagem (Processamento em Computação Gráfica & UX/UI)
+
+1. **Simulação de Renderização em Alta Resolução (LoD 2 — Altitude < 1.000m):**
+   * A imagem exemplifica a camada de alta definição do algoritmo `carregar_camada_satelite(lista_altitudes)`. Nesse nível, o motor gráfico renderiza detalhes estruturais complexos, como os colunados geométricos do templo e as ranhuras verticais do paredão rochoso.
+
+2. **Desafio Fotométrico de Shading e Textura Homogênea:**
+   * **Inconsistência de Sombras:** A forte iluminação solar gera sombras projetadas (*shadow casting*) intensas abaixo dos colunados e nas fendas das rochas. Em um sistema de renderização 3D como o *TerraVision*, a junção (*stitching*) dessa cena com imagens obtidas sob outros ângulos solares exige correção fotométrica rigorosa para evitar quebras no relevo tridimensional.
+   * **Desafio de Stitching:** A cor monocromática da rocha e da areia (tons amarelados e terracota) reduz a presença de pontos de alto contraste para algoritmos de alinhamento visual, exigindo normalização de histogramas.
+
+3. **Aplicação das Leis da Gestalt:**
+   * **Lei da Figura-Fundo:** As linhas geométricas e colunas do templo destacam-se como **Figura** (alto contraste estrutural), enquanto o massivo paredão de rocha e o solo árido funcionam como o **Fundo** homogêneo.
+   * **Lei da Continuidade e Proximidade:** As colunas alinhadas em filas horizontais conduzem a percepção visual do usuário em linhas contínuas, facilitando a identificação e navegação pela estrutura durante a aproximação da câmera virtual.
+
 
 ## 5. Estrutura do Relatório de Sustentação Técnica (Pitch Oral)
 
