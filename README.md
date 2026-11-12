@@ -6,7 +6,7 @@
 **Docente Responsável:** Prof.ª Angélica Neckel  
 **Discente:** Evelyn Kauany Lemes da Silva | **N.º:** 06 | **Turma:** 3.º D — Matutino  
 **Tema de Sensoriamento Remoto Designado:** Tema 6 — Zonas Desérticas e Camadas de Areia (Uniformes e Dunas)  
-**Data de Submissão:** 02 de Novembro de 2026  
+**Data de Submissão:** 16 de Novembro de 2026  
 
 ---
 
