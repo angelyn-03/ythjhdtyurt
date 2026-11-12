@@ -53,7 +53,7 @@ O processamento condicional classifica a aproximação da câmera virtual em tr�
 
 ## 4. Evidência de Mapeamento Geográfico
 
-<img width="1024" height="559" alt="image" src="deserto di saara.png" />  
+![Captura de tela do Google Earth](Dunas1.png)  
 *Figura 1: Mapeamento orbital de terreno árido via Google Earth. Observa-se a aplicação da renderização tridimensional de relevo, o sombreamento dinâmico de cristas e a manutenção da continuidade estrutural do solo.*
 
 ---
